@@ -2,15 +2,15 @@
 name = "blog_os"
 version = "0.1.0"
 authors = ["Sanshit Sagar <sanshit.sagar@gmail.com>"]
-edition = "2018" 
+edition = "2018"
 
-# the profile used for `cargo build`
-[profile.dev]
-panic = "abort" # disable stack unwinding on panic
+[[test]]
+name = "should_panic"
+harness = false
 
-# the profile used for `cargo build --release`
-[profile.release]
-panic = "abort" # disable stack unwinding on panic
+[[test]]
+name = "stack_overflow"
+harness = false
 
 [dependencies]
 bootloader = { version = "0.9.8", features = ["map_physical_memory"]}
@@ -19,16 +19,17 @@ volatile = "0.2.6"
 spin = "0.5.2"
 x86_64 = "0.11.0"
 uart_16550 = "0.2.0"
+pic8259_simple = "0.2.0"
+pc-keyboard = "0.5.0"
+linked_list_allocator = "0.8.5"
 
 [dependencies.lazy_static]
 version = "1.0"
 features = ["spin_no_std"]
 
 [package.metadata.bootimage]
-test-args = ["-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial", "stdio", "-display", "none"]
-test-success-exit-code = 33 
-test-timeout = 300 
-
-[[test]]
-name = "should_panic"
-harness = false
+test-args = [
+    "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial", "stdio",
+    "-display", "none"
+]
+test-success-exit-code = 33         # (0x10 << 1) | 1

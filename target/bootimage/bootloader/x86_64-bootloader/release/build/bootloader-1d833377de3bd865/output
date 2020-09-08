@@ -1,7 +1,7 @@
 cargo:rerun-if-changed=/Users/sanshitsagar/Desktop/RustOS/Cargo.toml
 cargo:rustc-link-search=native=/Users/sanshitsagar/Desktop/RustOS/target/bootimage/bootloader/x86_64-bootloader/release/build/bootloader-1d833377de3bd865/out
-cargo:rustc-link-lib=static=kernel_bin-blog_os
+cargo:rustc-link-lib=static=kernel_bin-heap_allocation-919548aae1de80cd
 cargo:rerun-if-env-changed=KERNEL
 cargo:rerun-if-env-changed=KERNEL_MANIFEST
-cargo:rerun-if-changed=/Users/sanshitsagar/Desktop/RustOS/target/x86_64-blog_os/debug/blog_os
+cargo:rerun-if-changed=/Users/sanshitsagar/Desktop/RustOS/target/x86_64-blog_os/debug/deps/heap_allocation-919548aae1de80cd
 cargo:rerun-if-changed=build.rs
