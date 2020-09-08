@@ -1,0 +1,7 @@
+cargo:rerun-if-changed=/Users/sanshitsagar/Desktop/RustOS/Cargo.toml
+cargo:rustc-link-search=native=/Users/sanshitsagar/Desktop/RustOS/target/bootimage/bootloader/x86_64-bootloader/release/build/bootloader-10b501e0ad1ee58e/out
+cargo:rustc-link-lib=static=kernel_bin-blog_os
+cargo:rerun-if-env-changed=KERNEL
+cargo:rerun-if-env-changed=KERNEL_MANIFEST
+cargo:rerun-if-changed=/Users/sanshitsagar/Desktop/RustOS/target/x86_64-blog_os/debug/blog_os
+cargo:rerun-if-changed=build.rs
