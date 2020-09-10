@@ -1,5 +1,5 @@
 [package]
-name = "blog_os"
+name = "rust_os"
 version = "0.1.0"
 authors = ["Sanshit Sagar <sanshit.sagar@gmail.com>"]
 edition = "2018"
