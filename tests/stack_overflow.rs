@@ -2,7 +2,6 @@
 #![no_main]
 #![feature(abi_x86_interrupt)]
 
-
 use core::panic::PanicInfo;
 use blog_os::serial_print;
 use lazy_static::lazy_static;

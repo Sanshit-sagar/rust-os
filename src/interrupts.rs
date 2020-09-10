@@ -1,13 +1,17 @@
-use crate::{gdt, print, println};
-use lazy_static::lazy_static;
-use pic8259_simple::ChainedPics;
-use spin;
+use crate::{
+    gdt,
+    print, 
+    println
+};
 use x86_64::structures::idt::{
     InterruptDescriptorTable, 
     InterruptStackFrame, 
     PageFaultErrorCode
 };
+use lazy_static::lazy_static;
+use pic8259_simple::ChainedPics;
 use crate::hlt_loop;
+use spin;
 
 pub const PIC_1_OFFSET: u8 = 32;
 pub const PIC_2_OFFSET: u8 = PIC_1_OFFSET + 8;
@@ -23,7 +27,6 @@ impl InterruptIndex {
     fn as_u8(self) -> u8 {
         self as u8
     }
-
     fn as_usize(self) -> usize {
         usize::from(self.as_u8())
     }
@@ -96,7 +99,6 @@ extern "x86-interrupt" fn keyboard_interrupt_handler(
             }
         }
     }
-
     unsafe {
         PICS.lock()
             .notify_end_of_interrupt(InterruptIndex::Keyboard.as_u8());
