@@ -51,25 +51,12 @@ unsafe impl FrameAllocator<Size4KiB> for BootInfoFrameAllocator {
     }
 }
 
-/// Initialize a new OffsetPageTable.
-///
-/// This function is unsafe because the caller must guarantee that the
-/// complete physical memory is mapped to virtual memory at the passed
-/// `physical_memory_offset`. Also, this function must be only called once
-/// to avoid aliasing `&mut` references (which is undefined behavior).
 pub unsafe fn init(physical_memory_offset: VirtAddr) -> OffsetPageTable<'static> {
     let level_4_table = active_level_4_table(physical_memory_offset);
     OffsetPageTable::new(level_4_table, physical_memory_offset)
 }
 
-/// Returns a mutable reference to the active level 4 table.
-///
-/// This function is unsafe because the caller must guarantee that the
-/// complete physical memory is mapped to virtual memory at the passed
-/// `physical_memory_offset`. Also, this function must be only called once
-/// to avoid aliasing `&mut` references (which is undefined behavior).
-///     
-/// made it private
+
 unsafe fn active_level_4_table(physical_memory_offset: VirtAddr)
     -> &'static mut PageTable
 {
@@ -84,12 +71,6 @@ unsafe fn active_level_4_table(physical_memory_offset: VirtAddr)
     &mut *page_table_ptr // unsafe
 }
 
-/// Translates the given virtual address to the mapped physical address, or
-/// `None` if the address is not mapped.
-///
-/// This function is unsafe because the caller must guarantee that the
-/// complete physical memory is mapped to virtual memory at the passed
-/// `physical_memory_offset`.
 pub unsafe fn translate_addr(addr: VirtAddr, physical_memory_offset: VirtAddr)
     -> Option<PhysAddr>
 {
